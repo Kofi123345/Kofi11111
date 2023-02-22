@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// Function to validate the password
+bool validatePassword(string password) {
+    // Password must have at least 8 characters and contain at least one uppercase, one lowercase and one digit
+    bool hasUpper = false, hasLower = false, hasDigit = false;
+    if (password.length() < 8) {
+        return false;
+    }
+    for (char c : password) {
+        if (isdigit(c)) {
+            hasDigit = true;
+        } else if (islower(c)) {
+            hasLower = true;
+        } else if (isupper(c)) {
+            hasUpper = true;
+        }
+    }
+    return hasUpper && hasLower && hasDigit;
+}
+
+int main() {
+    // Prompt the user for their first name
+    string firstName;
+    cout << "Programmer: Please enter your first name in C++: ";
+    cin >> firstName;
+
+    // Prompt the user to create a password
+    string password, confirmPassword;
+    while (true) {
+        cout << "Programmer: Please create a password: ";
+        cin >> password;
+        if (validatePassword(password)) {
+            break;
+        } else {
+            cout << "Password must contain at least 8 characters and contain at least one uppercase, one lowercase and one digit." << endl;
+        }
+    }
+
+    // Confirm the password
+    while (true) {
+        cout << "Programmer: Please confirm your password: ";
+        cin >> confirmPassword;
+        if (password == confirmPassword) {
+            break;
+        } else {
+            cout << "Passwords do not match. Please try again." << endl;
+        }
+    }
+
+    // Display the sign up information
+    cout << "User signed up successfully!" << endl;
+    cout << "First name: " << firstName << endl;
+    cout << "Password: " << password << endl;
+
+    return 0;
+}
